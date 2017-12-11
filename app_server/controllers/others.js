@@ -8,39 +8,7 @@ module.exports.home = function (req, res) {
 
 		title: 'Bookshelff',
 
-		home_data: {
-
-			hero: {
-
-				herotitle: 'Bookshelf',
-
-				hero_box_1a: 'Global',
-
-				hero_box_1b: 'Feed',
-
-				hero_box_1c: 'The art of avoiding failure.',
-
-				hero_box_2a: 'Team',
-
-				hero_box_2b: 'Feed',
-
-				hero_box_2c: 'Exploring the art of the possible.'
-
-
-			},
-
-			boxs: [{
-
-				header: 'What is it?',
-
-				body: ''
-			}, {
-
-				header: 'Why use it?',
-
-				body: ''
-			}]
-		}
+		
 	});
 };
 

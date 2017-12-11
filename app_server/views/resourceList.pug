@@ -10,13 +10,12 @@ block content
                           a.white(href="/resource/add/new") Add Resource
                   hr.hr_color
                   .error.resource_Angular {{message}}
-              
               .resource-sub-box.resource-sub-b
                   label.resource_Angular(for="filter") Filter results 
                   input#filter(type="text", name="filter", ng-model="textFilter", style="margin-left: 10px")
                   
                   table#sup.resource-table
-                      tr
+                      tr.row-header-background
                           th#titles.row_header Type
                           th#titles.row_header Title
                           th#titles.row_header Description

@@ -15,10 +15,6 @@ db.on('disconnected', function () {
 });
 
 
-
-
-
-
 gracefulShutdown = function (msg, callback) {
   mongoose.connection.close(function () {
     console.log('Mongoose disconnected through ' + msg);
@@ -34,5 +30,6 @@ process.on('SIGINT', function() {
 
 
 
-
 require('./resourceList');
+// require('./login');
+
