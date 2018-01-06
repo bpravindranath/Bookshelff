@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  .login
+  .register
       .login-form
           h1 Login
           hr
@@ -9,7 +9,7 @@ block content
               input(type='text', name='username', placeholder='Username', required='required')
               input(type='password', name='password', placeholder='Password', required='required')
               button.btn.btn-primary.btn-block.btn-large(type='submit') Lets Go
-
-
-      
-          
+          h5 New User?
+             span 
+               a(href='/users/register') Sign Up.
+        

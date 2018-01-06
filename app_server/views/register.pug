@@ -3,7 +3,7 @@ extends layout
 block content
   .register
       .login-form
-          h1 Sign UP
+          h1 Sign Up
           hr
           form(action="", method='post', role='form')
               input(type='text', name='firstname', placeholder='First Name', required='required')
@@ -11,9 +11,17 @@ block content
               input(type='email', name='email', placeholder='Email', required='required')
               input(type='text', name='username', placeholder='Username', required='required')
               input(type='password', name='password', placeholder='Password', required='required')
-              input(type='password', name='password', placeholder='ReEnter Password', required='required')
+              input(type='password', name='password2', placeholder='ReEnter Password', required='required')
               button.btn.btn-primary.btn-block.btn-large(type='submit') Lets Go
-
-
+          h5 Go to 
+             span 
+               a(href='/users/login') Login.
+          if errors    
+              hr   
+              each error in errors
+                  .alert
+                      span.fa.fa-times-circle.closebtn(onclick="this.parentElement.style.display='none';")
+                      p!= error.msg
+        
       
           

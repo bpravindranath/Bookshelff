@@ -7,6 +7,7 @@ html(ng-app='bookshelff')
     link(rel='stylesheet', href='/stylesheets/uikit.min.css')
     link(rel='stylesheet', href='/fonts/font-awesome.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
+
     
     
     script(src='/javascripts/jquery.min.js')
@@ -17,32 +18,31 @@ html(ng-app='bookshelff')
     
   
 
-  body
-      
-      #js-nav-panel.nav-panel
-          ul#nav-display
-             li
-                 a.home-link(href='/') Home
-             |             
-             li
-                 a.work-link(href='/about') About
-             |             
-             li
-                 a.capabilities-link(href='/resource') Bookshelff
-                      
-            
-        
-      |
-      .wrapper
-            .nav-bar
-               a.hamburger.hamburger--spin.js-slide-panel.menu-open(onclick='toggle()', type='button')
-                  span.hamburger-box
-                      span.hamburger-inner
-               a.company-name(href='/')
-                  | BOOKSHELFF
-               
-		
-            block content
+  body 
+    header
+      //- a.hamburger.hamburger--spin.js-slide-panel.menu-open(onclick='toggle()', type='button')
+      //-    span.hamburger-box
+      //-      span.hamburger-inner
+      #toggle.button_container
+         
+        span.top
+        span.middle
+        span.bottom
+      #overlay.overlay
+         nav.overlay-menu
+            ul
+               li
+                  a(href='/') Home
+               li
+                  a(href='/about') About
+               li
+                  a(href='/resource') Bookshelff
+               li
+                  a(href='/users/login') Login
+    
+    
 
+    block content
+      
 
             

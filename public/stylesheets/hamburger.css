@@ -37,14 +37,17 @@
   .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
     width: 20px;
     height: 1px;
-    background-color: #fff;
+    background-color: #F6672E;
     border-radius: 4px;
     position: absolute;
     transition-property: -webkit-transform;
     transition-property: transform;
     transition-property: transform, -webkit-transform;
     transition-duration: 0.15s;
-    transition-timing-function: ease; }
+    transition-timing-function: ease;
+
+  
+  }
   .hamburger-inner::before, .hamburger-inner::after {
     content: "";
     display: block; }
