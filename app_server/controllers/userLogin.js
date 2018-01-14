@@ -1,15 +1,13 @@
 var request = require('request');
-
 var User = require('../../app_api/models/login');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 
 var apiOptions = {
     server : "http://localhost:3000"
   };
 
                                         // Register Controller
-
-
-                                        
 
 // Controller For GET Request
 module.exports.register = function(req,res){
@@ -18,7 +16,6 @@ module.exports.register = function(req,res){
  };
 
  var renderRegister = function(req, res){
-    
     
     res.render('register',{
 
@@ -70,10 +67,12 @@ module.exports.registerAdd =  function (req, res){
         User.createUser(newUser, function(err, user){
 
             if(err) throw err;
-            console.log(user);
+            // console.log(user);
         });
 
         req.flash('success_msg', 'You are Registered and Can Now Login');
+        //maybe send a res render to the login page with a flash messege 
+
         res.redirect('login');
 
         // requestOptions = {
@@ -105,7 +104,39 @@ var renderLogin = function(req, res){
     });
 };
 
-// Controller for POST Request
-module.exports.loginAdd =  function (reg, res){
 
-};
+
+
+
+
+
+// // Controller for POST Request
+// module.exports.loginAdd =  function (reg, res){
+//     console.log('yo');
+//     passport.authenticate('local', {successRedirect:'/', failureRedirect: '/users/login', failureFlash: true });
+//     console.log('hi');
+//     res.redirect('/');
+// };
+
+// //gets the user name and matches the user name and validates the password
+// passport.use(new LocalStrategy(
+//     function(username, password, done) {
+
+//         User.getUserbyUsername(username, function(err, user){
+
+//         if (err) throw err;
+
+//         if (!user){
+//             return done(null, false, {message: 'Unknown User'});
+//         }
+
+//         User.comparePassword(password, user.password, function(err, isMatch){
+//             if(err) throw err;
+//             if(isMatch){
+//                 return done(null, user);
+//             } else {
+//                 return done(null, false, {message: 'Invalid password'});
+//             }
+//         });
+//      });
+// }));

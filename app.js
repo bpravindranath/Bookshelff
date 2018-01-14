@@ -13,9 +13,12 @@ var flash = require('connect-flash');
 var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var MongoStore = require('connect-mongo')(session);
+var mongoose = require('mongoose');
 
+mongoose.connect('mongodb://localhost/Bookshelff', { useMongoClient: true });
 
-require('./app_api/models/login'); 
+// require('./app_api/models/login'); 
 require('./app_api/models/db'); //starts my mongo db
 
 
@@ -23,6 +26,8 @@ require('./app_api/models/db'); //starts my mongo db
 var index = require('./app_server/routes/index');
 var users = require('./app_server/routes/users');
 
+// config for passport 
+// require('./app_api/config/passport');
 
 //Routes for REST API
 var routesApi = require('./app_api/routes/index');
@@ -36,21 +41,22 @@ app.set('view engine', 'pug');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
+
+//Static Folder for stuff publically available to browser
+app.use(express.static(path.join(__dirname, 'public')));
+
 //BodyParser and CookieParse Middleware
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-//Static Folder for stuff publically available to browser
-app.use(express.static(path.join(__dirname, 'public')));
-
-
 // Express Session
 app.use(session({
-  secret: 'secret',
+  secret: 'secretsessionkey',
+  resave: true,
   saveUninitialized: true,
-  resave: true
+ store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
 
 // // Passport init

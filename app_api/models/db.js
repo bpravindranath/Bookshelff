@@ -2,7 +2,7 @@
 var mongoose = require( 'mongoose' );
 
 
-mongoose.connect('mongodb://localhost/Bookshelff', { useMongoClient: true })
+// mongoose.connect('mongodb://localhost/Bookshelff', { useMongoClient: true })
 
 
 var db = mongoose.connection;

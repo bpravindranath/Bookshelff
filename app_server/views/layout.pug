@@ -40,7 +40,10 @@ html(ng-app='bookshelff')
                li
                   a(href='/users/login') Login
     
-    
+    if succes_msg
+      .alert
+        span.fa.fa-times-circle.closebtn(onclick="this.parentElement.style.display='none';")
+        p!= success_msg
 
     block content
       

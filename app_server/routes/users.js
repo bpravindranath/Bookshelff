@@ -1,6 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var ctrlLogging = require('../controllers/userLogin');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var User = require('../../app_api/models/login');
+
+
 
 
 
@@ -16,6 +21,56 @@ router.get('/register', ctrlLogging.register);
 router.get('/login', ctrlLogging.login);
 
 //Post
-router.post('/login', ctrlLogging.loginAdd);
+// r
+
+
+passport.use(new LocalStrategy(
+    function(username, password,done) {
+
+       User.getUserbyUsername(username, function(err, user){
+
+        if(err) {throw err;}
+
+        if(!user){
+            return done(null, false, {message: 'Unknown user'})
+        }
+
+        User.comparePassword(password, user.Password, function(err, ismatch){
+
+                if (err){throw err;}
+
+                if(ismatch){
+                    return done(null, user);
+
+                } else {
+                    return done(null, false, {message: 'Invalid Password'})
+                }                
+        });
+       });
+}));
+
+
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
+  });
+  
+passport.deserializeUser(function(id, done) {
+    User.getUserById(id, function(err, user) {
+      done(err, user);
+    });
+  });
+
+router.post('/login',
+
+    passport.authenticate('local', {successRedirect: '/', failureRedirect: '/users/login', failureFlash: true}),
+    function(req, res){
+        console.log( "HEllO YAY!");
+        res.redirect('/');
+    });
+
+
+
+
+  
 
 module.exports = router;
