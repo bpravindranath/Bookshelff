@@ -1,9 +1,14 @@
 
 /* OTHERS PAGES */
 
+var passport = require('passport');
 
 /* Get Home Page */
 module.exports.home = function (req, res) {
+
+	console.log(req.user);
+	console.log(req.isAuthenticated());
+
 	res.render('homepage', {
 
 		title: 'Bookshelff',

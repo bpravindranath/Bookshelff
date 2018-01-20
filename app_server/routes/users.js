@@ -32,7 +32,7 @@ passport.use(new LocalStrategy(
         if(err) {throw err;}
 
         if(!user){
-            return done(null, false, {message: 'Unknown user'})
+            return done(null, false, {message: 'Unknown user'});
         }
 
         User.comparePassword(password, user.Password, function(err, ismatch){

@@ -23,5 +23,9 @@ block content
                       span.fa.fa-times-circle.closebtn(onclick="this.parentElement.style.display='none';")
                       p!= error.msg
         
-      
+          if (user_message.length > 0)    
+              hr   
+              .alert
+                  span.fa.fa-times-circle.closebtn(onclick="this.parentElement.style.display='none';")
+                  p!= user_message
           

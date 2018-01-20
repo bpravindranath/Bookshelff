@@ -54,37 +54,61 @@ module.exports.registerAdd =  function (req, res){
 
     } else {
        
-        var newUser = new User({
-            FirstName: firstname,
-            LastName: lastname,
-            Email: email,
-            Username: username,
-            Password: password
-        })
+
+        User.getUserbyEmail(email, function(err, user){
+
+            console.log('Hello');
+            if(err) {throw err;}
+
+            //if user is found, send response message
+            if(user){
+
+                res.render('register',{
+                    user_message: 'User Already Exists'
+                });
+                // res.render('register', {
+                //     user_message: 'User already Exists'
+                // });
 
 
-        //TODO make more MVC take this function out of model and put into API controller
-        User.createUser(newUser, function(err, user){
+            } else {
 
-            if(err) throw err;
-            // console.log(user);
+                var newUser = new User({
+                    FirstName: firstname,
+                    LastName: lastname,
+                    Email: email,
+                    Username: username,
+                    Password: password
+                })
+        
+        
+                //TODO make more MVC take this function out of model and put into API controller
+                User.createUser(newUser, function(err, user){
+        
+                    if(err) throw err;
+                    console.log(user);
+
+
+
+                });
+        
+                req.flash('success_msg', 'You are Registered and Can Now Login');
+                //maybe send a res render to the login page with a flash messege 
+        
+                res.redirect('login');
+
+            }
+
+
         });
 
-        req.flash('success_msg', 'You are Registered and Can Now Login');
-        //maybe send a res render to the login page with a flash messege 
 
-        res.redirect('login');
+       
 
-        // requestOptions = {
-        //     url : apiOptions.server + path,
-        //     method: "POST",
-        //     json : postData
-        // };
-
+      
 
     }
 };
-
 
 
                                     // Register Controller
@@ -105,38 +129,3 @@ var renderLogin = function(req, res){
 };
 
 
-
-
-
-
-
-// // Controller for POST Request
-// module.exports.loginAdd =  function (reg, res){
-//     console.log('yo');
-//     passport.authenticate('local', {successRedirect:'/', failureRedirect: '/users/login', failureFlash: true });
-//     console.log('hi');
-//     res.redirect('/');
-// };
-
-// //gets the user name and matches the user name and validates the password
-// passport.use(new LocalStrategy(
-//     function(username, password, done) {
-
-//         User.getUserbyUsername(username, function(err, user){
-
-//         if (err) throw err;
-
-//         if (!user){
-//             return done(null, false, {message: 'Unknown User'});
-//         }
-
-//         User.comparePassword(password, user.password, function(err, isMatch){
-//             if(err) throw err;
-//             if(isMatch){
-//                 return done(null, user);
-//             } else {
-//                 return done(null, false, {message: 'Invalid password'});
-//             }
-//         });
-//      });
-// }));
